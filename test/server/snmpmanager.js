@@ -1,7 +1,7 @@
 const snmp = require("net-snmp");
 const snmpConfig = require('./config');
-
 var session = null;
+var i= require('./controllers/cm.controller');
 
 createSnmpSession = () => {
   if (session)
@@ -16,7 +16,7 @@ closeSnmpSession = () => {
 }
 
 SnmpGetRequest = async (obj) => {
-  
+  console.log('SnmpGetRequest obj.oid : ',obj.oid);
   return new Promise(function (resolve, reject) {
     session.get([obj.oid], function (error, varbinds) {
       if (error) {

@@ -30,7 +30,8 @@ var cmOidMap = require("../controllers/cm.controller");
 router.get('/cmtest', cmOidMap.test);
 router.post('/cmcreate', cmOidMap.cm_create);
 router.get('/:oidString', cmOidMap.cm);
-router.get('/cm/:id', cmOidMap.cm_details);
+//router.get('/cm/:id', cmOidMap.cm_details);
+router.get('/cmfe', cmOidMap.cm_details);
 router.put('/:id/cmupdate', cmOidMap.cm_update);
 router.delete('/:id/cmdelete', cmOidMap.cm_delete);
 

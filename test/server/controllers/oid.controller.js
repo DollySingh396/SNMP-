@@ -7,19 +7,24 @@ exports.test = function (req, res) {
 
 exports.new_create = function (req, res) {
     console.log('HERE',req.body);
+  
+        res.send(
+          `I received your POST request. This is what you sent me: ${req.body.name} -- ${req.body.oid}`,
+        );
+      
     var o = new o_id(
         {   
             name: req.body.name,
-            oid_value: req.body.oid_value
+            oid_value: req.body.oid
         }
     );
 
-    o.save(function (err) {
+   o.save(function (err) {
         if (err) {
             console.log(err);
             return err;
         }
-        res.send('Object ID Created successfully');
+       // res.send('Object ID Created successfully');
     });
 };
 

@@ -34,12 +34,16 @@ cmOidMap.set("cmWaveLength", {
 
 
 exports.test = function (req, res) {
+    console.log("route is called from react");
     res.send('Greetings from the Test controller- CM table!');
+    
 };
 
 
 exports.cm_create = function (req, res) {
     console.log('HERE', req.body);
+
+
     var o = new o_id(
         {
             nw_configuration: req.body.nw_configuration,
@@ -53,15 +57,17 @@ exports.cm_create = function (req, res) {
             console.log(err);
             return err;
         }
-        res.send('Object ID Created successfully - CM table');
+       // res.send('Object ID Created successfully - CM table');
     });
 };
 
 
 
 exports.cm = function (req, res, next) {
-    console.log(cmOidMap.get(req.params.oidString));
-
+   // req.params.oidString='1.3.6.1.4.1.5380.3.2.5.2.1.13';
+    console.log('inside cm function get', req.params, " and ", req.params.oidString)
+   // console.log("HERERE===> ",cmOidMap.get(req.params.oidString));
+    
     snmpManager.SnmpGetRequest(cmOidMap.get(req.params.oidString))
         .then(function (data) {
             // console.log("Promise Resolved", data);
@@ -73,13 +79,14 @@ exports.cm = function (req, res, next) {
         });
 };
 
-
+//console.log("*****");
 
 exports.cm_details = function (req, res) {
-    o_id.findById(req.params.id, function (err, o) {
+    o_id.findOne(req, function (err, o) {
         if (err)
             return err;
-        res.send(o);
+            console.log("*****");  
+        res.send("u have reaceived this data: ",o);
     })
 };
 
@@ -99,3 +106,4 @@ exports.cm_delete = function (req, res) {
 
 
 //module.exports = cmOidMap;
+
